@@ -45,6 +45,8 @@ public class Ship : MonoBehaviour
     private AudioSource audioSource;
     private readonly float maxLeft = 40;
     private readonly float maxRight = -40;
+    private readonly float maxUp = -40;
+    private readonly float maxDown = 2;
 
     private void Awake()
     {
@@ -72,6 +74,17 @@ public class Ship : MonoBehaviour
         {
             MoveRight();
         }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            MoveUp();
+        }
+
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            MoveDown();
+        }
+
     }
 
     public void ShootLaser()
@@ -101,7 +114,7 @@ public class Ship : MonoBehaviour
         transform.Translate(-Vector3.left * Time.deltaTime * speed);
         if (transform.localPosition.x > maxLeft)
         {
-            transform.localPosition = new Vector3(maxLeft, 0, 0);
+            transform.localPosition = new Vector3(maxLeft, transform.localPosition.y, transform.localPosition.z);
         }
     }
 
@@ -110,7 +123,24 @@ public class Ship : MonoBehaviour
         transform.Translate(-Vector3.right * Time.deltaTime * speed);
         if (transform.localPosition.x < maxRight)
         {
-             transform.localPosition = new Vector3(maxRight, 0, 0);
+             transform.localPosition = new Vector3(maxRight, transform.localPosition.y, transform.localPosition.z);
+        }
+    }
+
+    public void MoveUp()
+    {
+        transform.Translate(-Vector3.forward * Time.deltaTime * speed);
+        if (transform.localPosition.z < maxUp)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, maxUp);
+        }
+    }
+    public void MoveDown()
+    {
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        if (transform.localPosition.z > maxDown)
+        {
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, maxDown);
         }
     }
 
