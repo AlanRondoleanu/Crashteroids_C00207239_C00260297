@@ -32,8 +32,13 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    public float speed = 1;
+    public float speed;
     private readonly float maxY = -5;
+
+    private void Start()
+    {
+        speed = FindObjectOfType<Speed>().speed;
+    }
 
     private void Update()
     {

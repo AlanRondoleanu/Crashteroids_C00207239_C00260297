@@ -138,5 +138,15 @@ public class TestSuite
 
         Assert.True(pass);
     }
+
+    [UnityTest]
+    public IEnumerator SpeedIncreases()
+    {
+        float speed1 = game.speed.speed;
+        yield return new WaitForSeconds(5.0f);
+        float speed2 = game.speed.speed;
+
+        Assert.True(speed1 < speed2);
+    }
 }
 

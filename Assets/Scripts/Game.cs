@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private GameObject titleText;
     [SerializeField] private Spawner spawner;
+    public Speed speed;
 
     private static Game instance;
 
@@ -47,6 +48,7 @@ public class Game : MonoBehaviour
         shipModel.GetComponent<Ship>().RepairShip();
         spawner.ClearAsteroids();
         gameOverText.enabled = false;
+        speed.Reset();
     }
 
     public static void AsteroidDestroyed()
