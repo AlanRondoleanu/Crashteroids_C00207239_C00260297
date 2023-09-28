@@ -58,7 +58,18 @@ public class Asteroid : MonoBehaviour
     {
         if (collision.gameObject.name == "ShipModel")
         {
-            Game.GameOver();
+            Shield shields = collision.gameObject.GetComponent<Shield>();
+
+            if (shields.active == true)
+            {
+                shields.active = false;
+                shields.shield.SetActive(false);
+            }
+            else
+            {
+                Game.GameOver();
+            }
+
             Destroy(gameObject);
         }
     }
